@@ -4,6 +4,7 @@ before_action :ensure_correct_user, only: [:edit,:update,:destroy]
   def show
     @booknew = Book.new
     @book = Book.find(params[:id])
+    @book_comment = BookComment.new
     @user = @book.user
   end
 
@@ -49,8 +50,7 @@ before_action :ensure_correct_user, only: [:edit,:update,:destroy]
   def book_params
     params.require(:book).permit(:body,:title)
   end
-
-　 def ensure_correct_user
+  def ensure_correct_user
 
   @book =Book.find(params[:id])
   redirect_to books_path unless @book.user == current_user
