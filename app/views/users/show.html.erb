@@ -29,19 +29,9 @@
           <td><%= book.body %></td>
           <td>フォロー: <%= @user.followings.count %></td>
           <td>フォロワー: <%= @user.followers.count %></td>
-           <% if book.favorited_by?(current_user) %>
-            <td>
-              <%= link_to book_favorites_path(book), method: :delete do %>
-              <i class="bo1 fas fa-heart"><%= book.favorites.count %></i>
-              <% end %>
-            </td>
-            <% else %>
-            <td>
-              <%= link_to book_favorites_path(book), method: :post do %>
-              <i class="bo2 fas fa-heart"></i><%= book.favorites.count %>
-              <% end %>
-            </td>
-            <% end %>
+           <td id="favorite_buttons_<%= book.id %>">
+             <%= render "favorites/favorite", book: book %>
+       </td>
             <td>
               コメント：<%= book.user.book_comments.count %>
             </td>
